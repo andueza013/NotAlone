@@ -10,11 +10,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import Controlador.BaseDeDatos;
 import Modelo.Usuario;
 import java.awt.Toolkit;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Profile extends JFrame {
 
@@ -23,6 +27,7 @@ public class Profile extends JFrame {
 	private JTextField txtTlf;
 	BaseDeDatos b=new BaseDeDatos();
 	log_in l=new log_in();
+	Usuario u=new Usuario();
 
 	/**
 	 * Launch the application.
@@ -47,7 +52,7 @@ public class Profile extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/homeFolderIcon.png")));
 		setResizable(false);
 		b.conexion();
-		Usuario u=new Usuario();
+		
 		u=log_in.u;
 		u=b.InfoPersonal(u);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -85,6 +90,21 @@ public class Profile extends JFrame {
 		LblEmail.setBounds(65, 149, 167, 28);
 		contentPane.add(LblEmail);
 		LblEmail.setText(u.getEmail());
+		
+		JButton btnNewButton = new JButton("Change");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				u.setNombre(txtNombre.getText());
+				u.setTelefono(txtTlf.getText());
+				b.modify(u);
+				JOptionPane.showMessageDialog(null, "Perfil modificado!");
+			}
+		});
+		btnNewButton.setBounds(369, 241, 85, 21);
+		contentPane.add(btnNewButton);
+		
+		
+		
 		
 	}
 }

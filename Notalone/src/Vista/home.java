@@ -76,6 +76,7 @@ public class home extends JFrame {
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Profile p=new Profile();
+				p.main(null);
 				
 				
 			}

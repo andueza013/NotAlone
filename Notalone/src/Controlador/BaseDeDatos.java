@@ -457,6 +457,27 @@ public class BaseDeDatos {
 		return posts;
 
 	}
+	public void modify(Usuario u) {
+		String sentenciaSql = "UPDATE usuario SET nombre = ?, telefono = ? " + "WHERE idusuario = ?";
+		PreparedStatement sentencia = null;
+
+		try {
+			sentencia = conexion.prepareStatement(sentenciaSql);
+			sentencia.setString(1,u.getNombre());
+			sentencia.setString(2, u.getTelefono());
+			sentencia.setInt(3, u.getIdusuario());
+			sentencia.executeUpdate();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			if (sentencia != null)
+				try {
+					sentencia.close();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+}
+}
+	}
 	
 	
 	
