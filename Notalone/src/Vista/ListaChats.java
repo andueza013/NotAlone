@@ -56,7 +56,7 @@ public  class ListaChats extends JFrame {
 	public ListaChats() {
 		setResizable(false);
 		b.conexion();
-		chats=b.chats(log_in.u.getIdusuario());
+		
 		setBounds(100, 100, 775, 439);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,6 +67,7 @@ public  class ListaChats extends JFrame {
 			scrollPane.setBounds(10, 10, 741, 351);
 			contentPanel.add(scrollPane);
 			{
+				chats=b.chats(log_in.u.getIdusuario());
 				list = new JList();
 				DefaultListModel listModel = new DefaultListModel();
 				//Recorrer el contenido del ArrayList

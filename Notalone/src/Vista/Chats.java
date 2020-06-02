@@ -77,19 +77,7 @@ public class Chats extends JDialog {
 			
 			list = new JList();
 			DefaultListModel listModel = new DefaultListModel();
-			//Recorrer el contenido del ArrayList
-			for(int i=0;i<ListaChats.chats.size();i++) {
-				if(ListaChats.chats.get(i).getNombre().equals(correoUser2)) {
-					
-					u2.setIdusuario(ListaChats.chats.get(i).getIdusuario());
-				}
-			}
-			ArrayList<Mensaje>mensajes=b.Mensajes(log_in.u.getIdusuario(),u2.getIdusuario());
-			for(int i=0; i<mensajes.size();i++) {
-			    //Añadir cada elemento del ArrayList en el modelo de la lista
-			    listModel.add(i, mensajes.get(i).getContenido());
-			}
-			//Asociar el modelo de lista al JList
+			
 			list.setModel(listModel);
 			
 			scrollPane.setViewportView(list);
@@ -124,7 +112,7 @@ public class Chats extends JDialog {
         public void run() {
             while (true) {                    
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(800);
                     DefaultListModel listModel = new DefaultListModel();
         			//Recorrer el contenido del ArrayList
         			for(int i=0;i<ListaChats.chats.size();i++) {
