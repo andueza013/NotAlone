@@ -478,6 +478,31 @@ public class BaseDeDatos {
 }
 }
 	}
+	public int NumPublicaciones() {
+		int publicaciones=0;
+		String sentenciaSql = "SELECT count(*) FROM post";
+		PreparedStatement sentencia = null;
+		ResultSet resultado = null;
+		 
+		try {
+		  sentencia = conexion.prepareStatement(sentenciaSql);
+		  resultado = sentencia.executeQuery();
+		  while (resultado.next()) {
+		   publicaciones=resultado.getInt(1);
+		  }
+		} catch (SQLException sqle) {
+		  sqle.printStackTrace();
+		} finally {
+		  if (sentencia != null)
+		    try {
+		      sentencia.close();
+		      resultado.close();
+		    } catch (SQLException sqle) {
+		      sqle.printStackTrace();
+		    }
+		}
+		return publicaciones;
+	}
 	
 	
 	

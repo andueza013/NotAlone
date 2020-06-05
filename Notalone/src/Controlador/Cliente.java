@@ -1,5 +1,7 @@
 package Controlador;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
@@ -17,17 +19,22 @@ public class Cliente
             OutputStream outputStream = clientSocket.getOutputStream();
  
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
- 
-            BufferedImage image = ImageIO.read(new File("C:\\Users\\feryv\\Downloads\\Skype-20200327-181102.jpeg"));
-            ImageIO.write(image, "jpg", byteArrayOutputStream);
- 
-            byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
-            System.out.println(byteArrayOutputStream.size());
-            outputStream.write(byteArrayOutputStream.toByteArray());
-            Thread.sleep(2000);
- 
-            outputStream.close();
-            clientSocket.close();
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+            	BufferedImage image = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
+                ImageIO.write(image, "jpg", byteArrayOutputStream);
+     
+                byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
+                System.out.println(byteArrayOutputStream.size());
+                outputStream.write(byteArrayOutputStream.toByteArray());
+                Thread.sleep(2000);
+     
+                outputStream.close();
+                clientSocket.close();    
+            }
+            
         }
         catch (UnknownHostException e){
             System.out.println(e);

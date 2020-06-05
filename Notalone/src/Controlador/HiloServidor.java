@@ -30,7 +30,7 @@ public class HiloServidor extends Thread {
 
 	public void run() {// tarea a realizar con el cliente
 		
-		 byte[] imageAr = new byte[62100];
+		 byte[] imageAr = new byte[100000];
          try {
 			inputStream.read(imageAr);
 		} catch (IOException e1) {
@@ -48,7 +48,7 @@ public class HiloServidor extends Thread {
 
          System.out.println("Received " + image.getHeight() + "x" + image.getWidth() + ": " + System.currentTimeMillis());
          try {
-			ImageIO.write(image, "jpg", new File("C:\\UsuariosNotAlone\\imagenes\\"+publi+".png"));
+			ImageIO.write(image, "png", new File("C:\\UsuariosNotAlone\\imagenes\\"+publi+".png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
