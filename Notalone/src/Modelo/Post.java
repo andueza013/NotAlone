@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable{
 	public Post(int idusuario, String titulo, String contenido, String imagen) {
 		super();
 		this.idusuario = idusuario;

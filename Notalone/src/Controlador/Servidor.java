@@ -16,6 +16,7 @@ public class Servidor
     	BaseDeDatos b=new BaseDeDatos();
     	ServerSocket servidor;		
 		servidor = new ServerSocket(2050);
+		
 		System.out.println("Servidor iniciado...");
 		b.conexion();
 		while (true) {	

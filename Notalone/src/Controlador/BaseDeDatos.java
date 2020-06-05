@@ -503,6 +503,28 @@ public class BaseDeDatos {
 		}
 		return publicaciones;
 	}
+	public void InsertarPost( Post p) {
+		String sentenciaSql = "INSERT INTO post  VALUES (?, ?,?,?)";
+		PreparedStatement sentencia = null;
+
+		try {
+			sentencia = conexion.prepareStatement(sentenciaSql);
+			sentencia.setInt(1, p.getIdusuario());
+			sentencia.setString(2, p.getTitulo());
+			sentencia.setString(3, p.getContenido());
+			sentencia.setString(4, p.getImagen());
+			sentencia.executeUpdate();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			if (sentencia != null)
+				try {
+					sentencia.close();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+		}
+	}
 	
 	
 	

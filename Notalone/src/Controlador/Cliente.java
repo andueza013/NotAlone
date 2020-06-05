@@ -2,6 +2,8 @@ package Controlador;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
+import Modelo.Post;
+
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
@@ -9,31 +11,33 @@ import java.nio.ByteBuffer;
  
 public class Cliente
 {
+	static String ruta;
+	static Post p=new Post();
     public static void main(String[] args)
     {
+    	
         int port=2050;
         try
         {
             Socket clientSocket = new Socket("192.168.1.160",port);
  
             OutputStream outputStream = clientSocket.getOutputStream();
- 
+            ObjectOutputStream perSal = new ObjectOutputStream( clientSocket.getOutputStream());
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int returnVal = chooser.showOpenDialog(null);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-            	BufferedImage image = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
+            	
+            	
+            	BufferedImage image = ImageIO.read(new File(p.getImagen()));
                 ImageIO.write(image, "jpg", byteArrayOutputStream);
      
                 byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
                 System.out.println(byteArrayOutputStream.size());
                 outputStream.write(byteArrayOutputStream.toByteArray());
+                perSal.writeObject(p);
                 Thread.sleep(2000);
      
                 outputStream.close();
                 clientSocket.close();    
-            }
+            
             
         }
         catch (UnknownHostException e){
@@ -44,5 +48,9 @@ public class Cliente
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public  void reciboPost(Post p) {
+    	this.p=p;
+    	
     }
 }

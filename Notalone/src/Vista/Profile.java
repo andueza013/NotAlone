@@ -49,7 +49,7 @@ public class Profile extends JFrame {
 	 * Create the frame.
 	 */
 	public Profile() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/homeFolderIcon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/Resources/home.png")));
 		setResizable(false);
 		b.conexion();
 		

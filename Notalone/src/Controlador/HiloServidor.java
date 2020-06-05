@@ -14,25 +14,30 @@ import java.net.*;
 
 import javax.imageio.ImageIO;
 
+import Modelo.Post;
+
 public class HiloServidor extends Thread {
 	InputStream inputStream=null;
 			Socket socket = null;
 			BufferedImage image;
 			static String publi="";
-			
+			BaseDeDatos b=new BaseDeDatos();
+			ObjectInputStream inObjeto =null;
 
 	public HiloServidor(Socket s) throws IOException {// CONSTRUCTOR
 		socket = s;
 		inputStream=s.getInputStream();
+		inObjeto= new ObjectInputStream( s.getInputStream());
 		// se crean flujos de entrada y salida
 		
 	}
 
 	public void run() {// tarea a realizar con el cliente
-		
+		b.conexion();
 		 byte[] imageAr = new byte[100000];
          try {
 			inputStream.read(imageAr);
+			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -48,10 +53,15 @@ public class HiloServidor extends Thread {
 
          System.out.println("Received " + image.getHeight() + "x" + image.getWidth() + ": " + System.currentTimeMillis());
          try {
+        	  Post dato = (Post) inObjeto.readObject();
 			ImageIO.write(image, "png", new File("C:\\UsuariosNotAlone\\imagenes\\"+publi+".png"));
+			b.InsertarPost(dato);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
          try {

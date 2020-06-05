@@ -72,7 +72,7 @@ public class home extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnProfile = new JButton("Profile");
-		btnProfile.setIcon(new ImageIcon(home.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/homeFolderIcon.png")));
+		btnProfile.setIcon(null);
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Profile p=new Profile();
@@ -85,7 +85,7 @@ public class home extends JFrame {
 		panel.add(btnProfile);
 		
 		JButton btnChats = new JButton("Chats");
-		btnChats.setIcon(new ImageIcon(home.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/detailsViewIcon.png")));
+		btnChats.setIcon(null);
 		btnChats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaChats c=new ListaChats();
@@ -97,7 +97,7 @@ public class home extends JFrame {
 		panel.add(btnChats);
 		
 		JButton btnFriends = new JButton("Add Friends");
-		btnFriends.setIcon(new ImageIcon(home.class.getResource("/de/javasoft/plaf/synthetica/standard/images/treeCollapsedIcon.png")));
+		btnFriends.setIcon(null);
 		btnFriends.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				add_friend a=new add_friend();
@@ -108,7 +108,7 @@ public class home extends JFrame {
 		panel.add(btnFriends);
 		
 		JButton btnNewButton = new JButton("Post");
-		btnNewButton.setIcon(new ImageIcon(home.class.getResource("/resources/icons/famfamfam/palette.png")));
+		btnNewButton.setIcon(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Postes p=new Postes();

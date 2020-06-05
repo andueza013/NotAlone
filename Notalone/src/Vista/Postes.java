@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class Postes extends JDialog {
 
@@ -78,7 +79,7 @@ public class Postes extends JDialog {
 		
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Postes.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/arrow8x8Up_disabled.png")));
+		btnNewButton.setIcon(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(posicion>0) {
@@ -90,7 +91,7 @@ public class Postes extends JDialog {
 		contentPane.add(btnNewButton);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(Postes.class.getResource("/de/javasoft/plaf/synthetica/whitevision/images/arrowDown_disabled.png")));
+		button.setIcon(null);
 		actualizar();
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,8 +101,18 @@ public class Postes extends JDialog {
 				
 			}
 		});
-		button.setBounds(597, 293, 35, 68);
+		button.setBounds(597, 120, 35, 68);
 		contentPane.add(button);
+		
+		JButton btnNewButton_1 = new JButton("New Post");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NuevoPost p=new NuevoPost();
+				p.main(null);
+			}
+		});
+		btnNewButton_1.setBounds(541, 348, 89, 23);
+		contentPane.add(btnNewButton_1);
 	}
 	public void actualizar() {
 		Image img=new ImageIcon(posts.get(posicion).getImagen()).getImage();
