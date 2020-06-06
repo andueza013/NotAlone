@@ -389,8 +389,6 @@ public class BaseDeDatos {
 					sqle.printStackTrace();
 				}
 		}
-		for(int i =0;i<mensajes.size();i++) {
-		System.out.println(mensajes.get(i).getContenido());}
 		return mensajes;
 
 	}
@@ -422,6 +420,50 @@ public class BaseDeDatos {
 		ArrayList<Post> posts = new ArrayList<Post>();
 		String sentenciaSql = "select usuario.nombre, titulo, contenido,imagen from post inner join usuario on usuario.idusuario=post.idusuario"
 				+ "  where post.idusuario in (select idusuarioa  from amistad where idusuarioa=? or idusuariob=?)";
+		PreparedStatement sentencia = null;
+		ResultSet resultado = null;
+
+		try {
+			sentencia = conexion.prepareStatement(sentenciaSql);
+			sentencia.setInt(1, id);
+			sentencia.setInt(2, id);
+			resultado = sentencia.executeQuery();
+			int puntero = 0;
+			while (resultado.next()) {
+				Post p=new Post();
+				
+
+					p.setTitulo(resultado.getString(2));
+					p.setContenido(resultado.getString(3));
+					p.setImagen(resultado.getString(4));
+
+				
+				posts.add(p);
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			if (sentencia != null)
+				try {
+					sentencia.close();
+					resultado.close();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+		}
+	
+		return posts;
+
+	}
+	
+	public ArrayList<Post> posts2(int id) {
+		ArrayList<Post>posts=null;
+		if(posts(id).size()==0) {
+			posts = new ArrayList<Post>();
+		}else {
+		 posts = posts(id);}
+		String sentenciaSql = "select usuario.nombre, titulo, contenido,imagen from post inner join usuario on usuario.idusuario=post.idusuario"
+				+ "  where post.idusuario in (select idusuariob  from amistad where idusuarioa=? or idusuariob=?)";
 		PreparedStatement sentencia = null;
 		ResultSet resultado = null;
 

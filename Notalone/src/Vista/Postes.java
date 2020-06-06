@@ -58,7 +58,7 @@ public class Postes extends JDialog {
 	public Postes() {
 		setResizable(false);
 		b.conexion();
-		posts=b.posts(log_in.u.getIdusuario());
+		posts=b.posts2(log_in.u.getIdusuario());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 646, 411);
 		contentPane = new JPanel();
@@ -128,7 +128,7 @@ public class Postes extends JDialog {
                 try {
                     Thread.sleep(2000);
                    
-                    posts=b.posts(log_in.u.getIdusuario());
+                    posts=b.posts2(log_in.u.getIdusuario());
                         
                 } catch (InterruptedException e) {
                     e.printStackTrace();
