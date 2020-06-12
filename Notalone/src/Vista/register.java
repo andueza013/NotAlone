@@ -39,6 +39,7 @@ public class register extends JDialog {
 	
 		try {
 			register dialog = new register();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -51,6 +52,7 @@ public class register extends JDialog {
 	 * Create the dialog.
 	 */
 	public register() {
+		setLocationRelativeTo(null);
 		setTitle("REGISTRO");
 		b.conexion();
 		setBounds(100, 100, 556, 426);
@@ -94,10 +96,6 @@ public class register extends JDialog {
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(152, 182, 244, 28);
 		contentPanel.add(passwordField_1);
-		
-		JLabel contraseñaEncriptada = new JLabel("New label");
-		contraseñaEncriptada.setBounds(10, 324, 189, 13);
-		contentPanel.add(contraseñaEncriptada);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(10, 32, 90, 13);

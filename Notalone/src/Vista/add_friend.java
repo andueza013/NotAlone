@@ -34,6 +34,7 @@ public class add_friend extends JDialog {
 	public static void main(String[] args) {
 		try {
 			add_friend dialog = new add_friend();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -45,6 +46,7 @@ public class add_friend extends JDialog {
 	 * Create the dialog.
 	 */
 	public add_friend() {
+		setLocationRelativeTo(null);
 		setResizable(false);
 		b.conexion();
 		setBounds(100, 100, 755, 489);

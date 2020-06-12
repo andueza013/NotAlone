@@ -2,6 +2,7 @@ package Modelo;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Post implements Serializable{
 	public Post(int idusuario, String titulo, String contenido, String imagen) {
 		super();

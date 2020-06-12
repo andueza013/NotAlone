@@ -44,6 +44,7 @@ public class Postes extends JDialog {
 			public void run() {
 				try {
 					Postes frame = new Postes();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,6 +57,7 @@ public class Postes extends JDialog {
 	 * Create the frame.
 	 */
 	public Postes() {
+		setLocationRelativeTo(null);
 		setResizable(false);
 		b.conexion();
 		posts=b.posts2(log_in.u.getIdusuario());

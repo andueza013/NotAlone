@@ -35,6 +35,7 @@ public class log_in extends JDialog {
 	public static void main(String[] args) {
 		try {
 			log_in dialog = new log_in();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,6 +54,7 @@ public class log_in extends JDialog {
             System.out.println(e);
         }
 		setTitle("LOG IN");
+		setLocationRelativeTo(null);
 		BaseDeDatos b=new BaseDeDatos();
 		b.conexion();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\feryv\\Pictures\\Humpty_Dumpty.jpg"));

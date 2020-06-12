@@ -37,6 +37,7 @@ public class Profile extends JFrame {
 			public void run() {
 				try {
 					Profile frame = new Profile();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,6 +50,7 @@ public class Profile extends JFrame {
 	 * Create the frame.
 	 */
 	public Profile() {
+		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/Resources/home.png")));
 		setResizable(false);
 		b.conexion();

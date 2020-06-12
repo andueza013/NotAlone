@@ -35,6 +35,7 @@ public class Chats extends JDialog {
 	public static void ini(String s) {
 		try {
 			Chats dialog = new Chats();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 			dialog.setVisible(true);
 			correoUser2=s;
@@ -47,6 +48,7 @@ public class Chats extends JDialog {
 	 * Create the dialog.
 	 */
 	public Chats() {
+		setLocationRelativeTo(null);
 		setUndecorated(true);
 		setResizable(false);
 		b.conexion();

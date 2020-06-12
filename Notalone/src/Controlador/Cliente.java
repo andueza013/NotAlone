@@ -19,10 +19,11 @@ public class Cliente
         int port=2050;
         try
         {
-            Socket clientSocket = new Socket("192.168.1.160",port);
- 
+            Socket clientSocket = new Socket("192.168.56.1",port);
+            
             OutputStream outputStream = clientSocket.getOutputStream();
             ObjectOutputStream perSal = new ObjectOutputStream( clientSocket.getOutputStream());
+            
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             	
             	
@@ -33,7 +34,7 @@ public class Cliente
                 System.out.println(byteArrayOutputStream.size());
                 outputStream.write(byteArrayOutputStream.toByteArray());
                 perSal.writeObject(p);
-                Thread.sleep(2000);
+                Thread.sleep(10);
      
                 outputStream.close();
                 clientSocket.close();    
@@ -41,12 +42,12 @@ public class Cliente
             
         }
         catch (UnknownHostException e){
-            System.out.println(e);
+            System.out.println("pene");
         }
         catch (IOException e) {
-            System.out.println(e);
+            System.out.println("pene 2");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+          System.out.println("pene 3");
         }
     }
     public  void reciboPost(Post p) {

@@ -43,6 +43,7 @@ public  class ListaChats extends JFrame {
 	public static void main(String[] args) {
 		try {
 			ListaChats dialog = new ListaChats();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -56,7 +57,7 @@ public  class ListaChats extends JFrame {
 	public ListaChats() {
 		setResizable(false);
 		b.conexion();
-		
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 775, 439);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

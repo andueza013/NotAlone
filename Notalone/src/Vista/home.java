@@ -35,6 +35,7 @@ public class home extends JFrame {
 				try {
 					home frame = new home();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 					user=log_in.u;
 					
 				} catch (Exception e) {
@@ -48,6 +49,7 @@ public class home extends JFrame {
 	 * Create the frame.
 	 */
 	public home() {
+		setLocationRelativeTo(null);
 		setResizable(false);
 		try{
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

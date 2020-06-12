@@ -18,13 +18,16 @@ public class Servidor
 		servidor = new ServerSocket(2050);
 		
 		System.out.println("Servidor iniciado...");
+		InetAddress address = InetAddress.getLocalHost();
+        System.out.println("IP Local :"+address.getHostAddress());
 		b.conexion();
 		while (true) {	
 			Socket cliente = new Socket();
+			
 			cliente=servidor.accept();//esperando cliente	
+			
 			HiloServidor hilo = new HiloServidor(cliente);
-			n=b.NumPublicaciones()+1;
-			hilo.nombre("publi"+n);
+			
 			
 			hilo.start();
 			

@@ -17,19 +17,13 @@ public class BaseDeDatos {
 	public void conexion() {
 
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
+			Class.forName("org.postgresql.Driver");
 			conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/NotAlone", "postgres", "postgres");
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.fillInStackTrace();
 		} catch (SQLException sqle) {
 			sqle.fillInStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 
 	public void insertarRol() {
@@ -282,7 +276,7 @@ public class BaseDeDatos {
 		return IsFriend;
 	}
 
-	@SuppressWarnings("null")
+	
 	public ArrayList<Usuario> chats(int id) {
 		ArrayList<Usuario> chats = new ArrayList<Usuario>();
 		String sentenciaSql = "select nombre,idusuario from usuario inner join conversacion on idusuario=idusuariob or idusuario=idusuarioa where idusuarioa=? or idusuariob=?";
