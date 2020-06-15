@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 public class Postes extends JDialog {
 
@@ -35,6 +36,7 @@ public class Postes extends JDialog {
 	int posicion=0;
 	JLabel lblNewLabel;
 	JTextArea textArea;
+	public static Postes frame;
 
 	/**
 	 * Launch the application.
@@ -43,7 +45,7 @@ public class Postes extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Postes frame = new Postes();
+					 frame = new Postes();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -57,30 +59,35 @@ public class Postes extends JDialog {
 	 * Create the frame.
 	 */
 	public Postes() {
+		setTitle("POSTS");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Postes.class.getResource("/Resources/logo.png")));
 		setLocationRelativeTo(null);
 		setResizable(false);
 		b.conexion();
 		posts=b.posts2(log_in.u.getIdusuario());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 646, 411);
+		setBounds(100, 100, 665, 493);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(176, 224, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-	lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(69, 107, 468, 221);
+	lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(114, 62, 402, 221);
 		contentPane.add(lblNewLabel);
 		
 		textArea = new JTextArea();
+		textArea.setFont(new Font("Courier New", Font.BOLD, 11));
+		textArea.setBackground(new Color(176, 224, 230));
 		textArea.setEditable(false);
-		textArea.setBounds(69, 10, 468, 87);
+		textArea.setBounds(114, 307, 402, 87);
 		textArea.setBorder(null);
 		contentPane.add(textArea);
 		
 		
-		JButton btnNewButton = new JButton("");
+		JButton btnNewButton = new JButton("<<");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnNewButton.setIcon(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,10 +96,11 @@ public class Postes extends JDialog {
 				actualizar();}else {}
 			}
 		});
-		btnNewButton.setBounds(597, 30, 35, 79);
+		btnNewButton.setBounds(24, 197, 43, 79);
 		contentPane.add(btnNewButton);
 		
-		JButton button = new JButton("");
+		JButton button = new JButton(">>");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		button.setIcon(null);
 		actualizar();
 		button.addActionListener(new ActionListener() {
@@ -103,7 +111,7 @@ public class Postes extends JDialog {
 				
 			}
 		});
-		button.setBounds(597, 120, 35, 68);
+		button.setBounds(587, 198, 43, 78);
 		contentPane.add(button);
 		
 		JButton btnNewButton_1 = new JButton("New Post");
@@ -113,12 +121,23 @@ public class Postes extends JDialog {
 				p.main(null);
 			}
 		});
-		btnNewButton_1.setBounds(541, 348, 89, 23);
+		btnNewButton_1.setBounds(444, 416, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Back");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+				
+			}
+		});
+		btnNewButton_2.setBounds(543, 416, 99, 22);
+		contentPane.add(btnNewButton_2);
 	}
 	public void actualizar() {
 		Image img=new ImageIcon(posts.get(posicion).getImagen()).getImage();
-		ImageIcon img2=new ImageIcon(img.getScaledInstance(468, 221, Image.SCALE_SMOOTH));
+		ImageIcon img2=new ImageIcon(img.getScaledInstance(402, 221, Image.SCALE_SMOOTH));
 		lblNewLabel.setIcon(img2);
 		textArea.setText(posts.get(posicion).getContenido());
 	}

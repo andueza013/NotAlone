@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.Font;
 import javax.swing.JPasswordField;
@@ -34,6 +35,21 @@ public class log_in extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
+			
+			try {
+				
+				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+					if ( "Nimbus".equals(info.getName())) {
+						UIManager.setLookAndFeel(info.getClassName());
+						break;
+					}
+				}
+				
+			}catch (Exception e) {
+				
+			}
+			
+			
 			log_in dialog = new log_in();
 			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -48,40 +64,40 @@ public class log_in extends JDialog {
 	 */
 	public log_in() {
 		setResizable(false);
-		try{
+		/*try{
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch(Exception e){
             System.out.println(e);
-        }
+        }*/
 		setTitle("LOG IN");
 		setLocationRelativeTo(null);
 		BaseDeDatos b=new BaseDeDatos();
 		b.conexion();
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\feryv\\Pictures\\Humpty_Dumpty.jpg"));
-		setBounds(100, 100, 547, 333);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(log_in.class.getResource("/Resources/logo.png")));
+		setBounds(100, 100, 500, 343);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(Color.WHITE);
+		contentPanel.setBackground(new Color(176, 224, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("email");
+		JLabel lblNewLabel = new JLabel("E-mail");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(10, 61, 59, 13);
+		lblNewLabel.setBounds(84, 53, 59, 13);
 		contentPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("password");
+		JLabel lblNewLabel_1 = new JLabel("Password");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(10, 120, 109, 22);
+		lblNewLabel_1.setBounds(84, 132, 109, 22);
 		contentPanel.add(lblNewLabel_1);
 		
 		txtEmail = new JTextField("lokomoskito3@hotmail.com");
-		txtEmail.setBounds(146, 58, 332, 28);
+		txtEmail.setBounds(84, 82, 332, 28);
 		contentPanel.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		txtPass = new JPasswordField("fer 28121997");
-		txtPass.setBounds(146, 125, 332, 28);
+		txtPass.setBounds(84, 164, 332, 28);
 		contentPanel.add(txtPass);
 		
 		JButton btnNewButton = new JButton("Registro");
@@ -93,46 +109,40 @@ public class log_in extends JDialog {
 				
 			}
 		});
-		btnNewButton.setBounds(10, 190, 85, 21);
+		btnNewButton.setBounds(331, 220, 85, 21);
 		contentPanel.add(btnNewButton);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Methods m=new Methods();
-						
-						char[] arrayC = txtPass.getPassword();
-						String pass = new String(arrayC);
-						u.setEmail(txtEmail.getText());
-						u.setPassword_encripted(m.Encript(pass));
-						u.setIdusuario(b.SacarID(u.getEmail()));
-						System.out.println(u.getIdusuario());
-						
-						if(b.InicioSesion(u)) {
-							JOptionPane.showMessageDialog(null,"Inicio de sesión correcto");
-							home h=new home();
-							h.main(null);
-							setVisible(false);
-						}else {
-							JOptionPane.showMessageDialog(null,"Inicio de sesión incorrecto");
-						}
-						
+			JButton okButton = new JButton("Aceptar");
+			okButton.setBounds(84, 220, 85, 21);
+			contentPanel.add(okButton);
+			okButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Methods m=new Methods();
+					
+					char[] arrayC = txtPass.getPassword();
+					String pass = new String(arrayC);
+					u.setEmail(txtEmail.getText());
+					u.setPassword_encripted(m.Encript(pass));
+					u.setIdusuario(b.SacarID(u.getEmail()));
+					System.out.println(u.getIdusuario());
+					
+					if(b.InicioSesion(u)) {
+						JOptionPane.showMessageDialog(null,"Inicio de sesión correcto");
+						home h=new home();
+						h.main(null);
+						setVisible(false);
+					}else {
+						JOptionPane.showMessageDialog(null,"Inicio de sesión incorrecto");
 					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+					
+				}
+			});
+			okButton.setActionCommand("OK");
+			getRootPane().setDefaultButton(okButton);
 		}
+		
+		JLabel lblNewLabel_2 = new JLabel("\u00BFEres nuevo?");
+		lblNewLabel_2.setBounds(254, 219, 77, 22);
+		contentPanel.add(lblNewLabel_2);
 	}
 }

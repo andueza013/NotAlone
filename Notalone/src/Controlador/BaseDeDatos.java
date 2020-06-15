@@ -168,22 +168,33 @@ public class BaseDeDatos {
 		return inicioCorrecto;
 	}
 
-	public String Busqueda(String s) {
-
-		String sentenciaSql = "SELECT nombre FROM usuario WHERE email=?";
+	public ArrayList<Usuario> Busqueda(String s) {
+		String sentenciaSql="";
+		if(s.length()>0) {
+		 sentenciaSql = "SELECT nombre FROM usuario WHERE email=?";}
+		else {
+			sentenciaSql="SELECT nombre,email FROM usuario";
+		}
 		PreparedStatement sentencia = null;
 		ResultSet resultado = null;
-		String persona = "";
+		ArrayList<Usuario>persona = new ArrayList<Usuario>();
 
 		try {
 
 			sentencia = conexion.prepareStatement(sentenciaSql);
-			sentencia.setString(1, s);
+			if(s.length()>0) {
+			sentencia.setString(1, s);}
 			resultado = sentencia.executeQuery();
 			while (resultado.next()) {
 				Usuario u = new Usuario();
-				u.setNombre(resultado.getString(1));
-				persona = u.getNombre();
+				if(s.length()>0) {
+				u.setNombre(resultado.getString(1));}
+				else {
+					u.setNombre(resultado.getString(1));
+					u.setEmail(resultado.getString(2));
+				}
+				
+				persona.add(u);
 				System.out.println(u.getNombre());
 
 			}
@@ -354,6 +365,12 @@ public class BaseDeDatos {
 		String sentenciaSql = "select * from mensaje where idusuario_emisor=? and idusuario_receptor=? or idusuario_emisor=? and idusuario_receptor=?";
 		PreparedStatement sentencia = null;
 		ResultSet resultado = null;
+		Usuario emisor=new Usuario();
+		emisor.setIdusuario(id);
+		emisor=InfoPersonal(emisor);
+		Usuario receptor=new Usuario();
+		receptor.setIdusuario(id2);
+		receptor=InfoPersonal(receptor);
 
 		try {
 			sentencia = conexion.prepareStatement(sentenciaSql);
@@ -365,11 +382,15 @@ public class BaseDeDatos {
 			int puntero = 0;
 			while (resultado.next()) {
 				Mensaje m = new Mensaje();
-				
+				if(id==resultado.getInt(2)) {
+					m.setContenido(emisor.getNombre()+": "+resultado.getString(4));
+				}else {
+					m.setContenido(receptor.getNombre()+": "+resultado.getString(4));
+				}
 				m.setidmensaje(resultado.getInt(1));
 				m.setIdusuarioemisor(resultado.getInt(2));
 				m.setIdusuarioreceptor(resultado.getInt(3));
-				m.setContenido(resultado.getString(4));
+				
 				mensajes.add(m);
 			}
 		} catch (SQLException sqle) {

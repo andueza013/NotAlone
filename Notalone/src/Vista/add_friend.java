@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.AbstractListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class add_friend extends JDialog {
@@ -27,13 +29,14 @@ public class add_friend extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtmail;
 	BaseDeDatos b=new BaseDeDatos();
-
+	ArrayList<Usuario>users=new ArrayList<Usuario>();
+	static add_friend dialog;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			add_friend dialog = new add_friend();
+			dialog = new add_friend();
 			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -46,17 +49,20 @@ public class add_friend extends JDialog {
 	 * Create the dialog.
 	 */
 	public add_friend() {
+		setTitle("A\u00D1ADIR AMIGOS");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(add_friend.class.getResource("/Resources/logo.png")));
 		setLocationRelativeTo(null);
 		setResizable(false);
 		b.conexion();
-		setBounds(100, 100, 755, 489);
+		setBounds(100, 100, 578, 489);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(176, 224, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 63, 721, 348);
+		scrollPane.setBounds(127, 63, 370, 348);
 		contentPanel.add(scrollPane);
 		
 		JList<Object> list = new JList<Object>();
@@ -73,7 +79,7 @@ public class add_friend extends JDialog {
 		
 		
 		txtmail = new JTextField();
-		txtmail.setBounds(127, 10, 501, 31);
+		txtmail.setBounds(127, 10, 370, 31);
 		contentPanel.add(txtmail);
 		txtmail.setColumns(10);
 		
@@ -83,24 +89,29 @@ public class add_friend extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				DefaultListModel<Object> modelo = new DefaultListModel();
-				modelo.addElement(b.Busqueda(txtmail.getText()));
+				
+				users=b.Busqueda(txtmail.getText());
+				for(int i=0;i<users.size();i++) {
+					
+				modelo.addElement(users.get(i).getNombre());}
 				list.setModel(modelo);
 				
 			}
 		});
-		btnNewButton.setBounds(10, 9, 85, 21);
+		btnNewButton.setBounds(10, 9, 107, 32);
 		contentPanel.add(btnNewButton);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(176, 224, 230));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Agregar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Usuario amigo=new Usuario();
 						
-						amigo.setIdusuario(b.SacarID(txtmail.getText()));
+						amigo.setIdusuario(b.SacarID(users.get(list.getSelectedIndex()).getEmail()));
 						System.out.println(amigo.getIdusuario());
 						if(b.SonAmigos(log_in.u, amigo)) {
 							JOptionPane.showMessageDialog(null, "Ya sois amigos");
@@ -115,7 +126,13 @@ public class add_friend extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Salir");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						dialog.dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

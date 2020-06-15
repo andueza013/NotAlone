@@ -19,6 +19,8 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Profile extends JFrame {
 
@@ -50,50 +52,57 @@ public class Profile extends JFrame {
 	 * Create the frame.
 	 */
 	public Profile() {
+		setTitle("PERFIL");
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/Resources/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Profile.class.getResource("/Resources/logo.png")));
 		setResizable(false);
 		b.conexion();
 		
 		u=log_in.u;
 		u=b.InfoPersonal(u);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
-		setBounds(50, 50, 500, 300);
+		contentPane.setBackground(new Color(176, 224, 230));
+		setBounds(50, 50, 490, 355);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(10, 54, 45, 13);
+		lblNewLabel.setBounds(65, 109, 45, 13);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblTlf = new JLabel("Tlf");
-		lblTlf.setBounds(10, 92, 45, 13);
+		lblTlf.setBounds(65, 167, 45, 13);
 		contentPane.add(lblTlf);
 		
 		
 		JLabel lblEmail = new JLabel("email");
-		lblEmail.setBounds(10, 149, 45, 13);
+		lblEmail.setBounds(65, 220, 45, 13);
 		contentPane.add(lblEmail);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(65, 42, 96, 28);
+		txtNombre.setEnabled(false);
+		txtNombre.setEditable(false);
+		txtNombre.setBounds(136, 102, 96, 28);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		txtNombre.setText(u.getNombre());
 		
 		txtTlf = new JTextField();
-		txtTlf.setBounds(65, 89, 96, 34);
+		txtTlf.setEnabled(false);
+		txtTlf.setEditable(false);
+		txtTlf.setBounds(136, 157, 96, 34);
 		contentPane.add(txtTlf);
 		txtTlf.setColumns(10);
 		txtTlf.setText(u.getTelefono());
 		
 		JLabel LblEmail = new JLabel("New label");
-		LblEmail.setBounds(65, 149, 167, 28);
+		LblEmail.setBounds(136, 212, 167, 28);
 		contentPane.add(LblEmail);
 		LblEmail.setText(u.getEmail());
 		
-		JButton btnNewButton = new JButton("Change");
+		JButton btnNewButton = new JButton("Save");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				u.setNombre(txtNombre.getText());
@@ -102,8 +111,28 @@ public class Profile extends JFrame {
 				JOptionPane.showMessageDialog(null, "Perfil modificado!");
 			}
 		});
-		btnNewButton.setBounds(369, 241, 85, 21);
+		btnNewButton.setBounds(355, 270, 105, 28);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Edit");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				txtNombre.setEditable(true);
+				txtNombre.setEnabled(true);
+				txtTlf.setEditable(true);
+				txtTlf.setEnabled(true);
+				
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(364, 23, 96, 28);
+		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Informaci\u00F3n Personal");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(41, 45, 191, 19);
+		contentPane.add(lblNewLabel_1);
 		
 		
 		

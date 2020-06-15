@@ -22,6 +22,7 @@ import javax.swing.DefaultListSelectionModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public  class ListaChats extends JFrame {
 
@@ -35,6 +36,7 @@ public  class ListaChats extends JFrame {
 	static JList list;
 	static ArrayList<Usuario>chats=new ArrayList<Usuario>();
 	static JButton okButton;
+	static ListaChats dialog;
 	
 
 	/**
@@ -42,7 +44,7 @@ public  class ListaChats extends JFrame {
 	 */
 	public static void main(String[] args) {
 		try {
-			ListaChats dialog = new ListaChats();
+			dialog = new ListaChats();
 			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -55,6 +57,8 @@ public  class ListaChats extends JFrame {
 	 * Create the dialog.
 	 */
 	public ListaChats() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaChats.class.getResource("/Resources/logo.png")));
+		setTitle("LISTA AMIGOS");
 		setResizable(false);
 		b.conexion();
 		setLocationRelativeTo(null);
@@ -90,7 +94,7 @@ public  class ListaChats extends JFrame {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				okButton = new JButton("OK");
+				okButton = new JButton("Chatear");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Chats c=new Chats();
@@ -105,7 +109,12 @@ public  class ListaChats extends JFrame {
 				
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Salir");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dialog.dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
