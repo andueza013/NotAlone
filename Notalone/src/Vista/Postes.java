@@ -3,6 +3,8 @@ package Vista;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -72,7 +74,29 @@ public class Postes extends JDialog {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		contentPane.setFocusable(true);
+		contentPane.addKeyListener(new KeyListener(){
+			public void keyTyped(KeyEvent e){
+				//Aqui no funcionara
+			}
+			public void keyPressed(KeyEvent e){
+				if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+					if(posicion<posts.size()-1) {
+						posicion++;
+						actualizar();}else {}
+				}
+				if(e.getKeyCode()==KeyEvent.VK_LEFT){
+					if(posicion>0) {
+						posicion--;
+						actualizar();}else {}
+				}
+			}
+			public void keyReleased(KeyEvent e){
+				//Aqui tambien puedes insertar el codigo
+			}
+		});
+
+
 	lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(114, 62, 402, 221);
 		contentPane.add(lblNewLabel);
@@ -161,4 +185,5 @@ public class Postes extends JDialog {
         }
         
     };
+
 }
